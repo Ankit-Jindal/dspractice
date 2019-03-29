@@ -3,16 +3,21 @@ package com.ankit.sorting;
 public class MergSort {
     public static void main(String[] args) {
         int[] unsorted = {10, 14, 3, 11, 8, 9};// 5/2= 2
+        System.out.println("mergSort1");
         int[] sorted = mergeSort1(unsorted);
+
         for (int i : sorted) {
             System.out.print(i+", ");
         }
-
+        System.out.println();
+        int[] unsorted1 = {10, 14, 3, 11, 8, 9};
+        mergSort(unsorted1);
     }
 
     private static void mergSort(int[] arr) {
         int[] temp = new int[arr.length];
         mergSortAlg(arr, temp, 0, arr.length -1 );
+        System.out.println("mergSort");
         for (int i : temp) {
             System.out.print(i+", ");
         }
@@ -52,10 +57,12 @@ public class MergSort {
         while (larrStart <= lefArrEnd) {
             temp[intoTempIdx] = arr[larrStart];
             larrStart ++;
+            intoTempIdx++;
         }
         while (rArrStart <= rArrEnd) {
             temp[intoTempIdx] = arr[larrStart];
             rArrStart ++;
+            intoTempIdx++;
         }
 
         System.arraycopy(temp,leftIdx,arr,leftIdx,rghtIdx - leftIdx + 1);
@@ -73,8 +80,8 @@ public class MergSort {
         for(int i = 0 ; i <= leftA.length - 1 ; i++) leftA[i] = array[left + i];
         for(int i = 0 ; i <= rightA.length - 1 ; i++) rightA[i] = array[mid + 1 + i];
 
-        mergSort(leftA);
-        mergSort(rightA);
+        leftA = mergeSort1(leftA);
+        rightA = mergeSort1(rightA);
         return merg2SortedArr(leftA,rightA);
     }
 
@@ -95,13 +102,13 @@ public class MergSort {
             mI++;
         }
 
-        while (lI <= left.length) {
-            neWARR[mI] = lI;
+        while (lI < left.length) {
+            neWARR[mI] = left[lI];
             lI++;
             mI++;
         }
-        while (rI <= right.length) {
-            neWARR[mI] = rI;
+        while (rI < right.length) {
+            neWARR[mI] = right[rI];
             rI++;
             mI++;
         }
